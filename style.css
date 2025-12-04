@@ -1,0 +1,406 @@
+/* تنسيق عام لكل العناصر */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Gill Sans';
+  box-sizing: border-box; /* يضمن حساب الأبعاد بشكل صحيح */
+  scroll-behavior: smooth; /* لتحسين الانتقال بين الشرائح */
+}
+
+/* خلفية الصفحة */
+body {
+  background-color: rgb(51, 34, 8);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.285), rgba(0, 0, 0, 0.597)), url("v1.png");
+  background-repeat: no-repeat;
+  background-size: cover; /* تغيير إلى cover لتغطية الصفحة عند التمرير */
+  background-attachment: fixed; /* تثبيت الخلفية عند التمرير */
+  display: flex;
+  justify-content: flex-start; /* البدء من الأعلى */
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh; /* الحد الأدنى لارتفاع الشاشة */
+  height: auto; /* السماح للصفحة بالطول */
+  color: white;
+  overflow-y: auto; /* تفعيل التمرير العمودي */
+  overflow-x: hidden; /* منع التمرير الأفقي */
+  padding-bottom: 50px; /* مسافة في الأسفل */
+}
+
+/* صندوق الشات */
+.chat-container {
+  width: 660px;
+  height: 700px;
+  background: rgba(0, 0, 0, 0.486);
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin-top: 50px; /* مسافة من الأعلى */
+  margin-bottom: 100px; /* مسافة تفصل الشات عن الخريطة */
+  z-index: 2; /* لضمان ظهوره فوق العناصر الأخرى */
+  position: relative;
+}
+
+
+/* رأس الشات */
+.chat-header {
+  background: #694520;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 20px;
+}
+
+/* الصندوق الذي تظهر فيه الرسائل */
+.chat-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  overflow-y: auto;
+  font-size: 19px;
+}
+
+/* -----------------------------------
+ * تنسيق الأزرار (Buttons)
+ * ----------------------------------- */
+#main-buttons {
+    display: flex; 
+    flex-wrap: wrap; /* تسمح للأزرار بالنزول لسطر جديد إذا لم تتسع */
+    gap: 15px; /* تباعد جيد بين الأزرار */
+    margin-top: 15px; 
+    margin-bottom: 20px; 
+    width: 100%; 
+    justify-content: flex-end; /* لتركيز الأزرار لليمين بجوار الرسائل (في RTL) */
+    padding: 0 10px; /* مسافة حول الأزرار */
+}
+
+#main-buttons button {
+    /* تنسيق الحجم والشكل */
+    padding: 12px 20px; 
+    font-size: 17px; 
+    min-width: 100px;
+    border: none;
+    border-radius: 25px; 
+    /* تنسيق الألوان (بني داكن) */
+    background-color: #723a11; 
+    color: #F8F8FF;
+    box-shadow: 0 4px #5C320E; /* ظل لإعطاء عمق */
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#main-buttons button:hover {
+    background-color: #A0522D; 
+}
+
+#main-buttons button:active {
+    box-shadow: 0 2px #5C320E;
+    transform: translateY(2px);
+}
+
+
+/* 
+ * تنسيق فقاعات الرسائل بشكل عام .chat-message(
+  */
+.chat-message {
+    max-width: 75%;
+    margin-bottom: 12px; 
+    padding: 12px 18px; 
+    border-radius: 15px;
+    font-size: 19px;
+    line-height: 1.6; 
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* ظل للبروز */
+    word-wrap: break-word; 
+}
+
+/* تنسيق الرسائل */
+.message {
+  margin: 8px 0;
+  padding: 10px 15px;
+  border-radius: 15px;
+  max-width: 75%;
+  line-height: 1.5;
+}
+
+/* رسالة المستخدم 
+ تنسيق رسالة المستخدم التي تظهر عند الضغط على الزر*/
+.user {
+  background: #7e674f;
+  color: white;
+  margin-left: auto;
+  text-align: right;
+}
+
+/* رسالة البوت
+تنسيق رسالة البوت (الرد على الضغطة */
+.bot {
+  background: #4e3317c4;
+  color: #fff;
+  margin-right: auto;
+  text-align: right;
+}
+
+/* مدخل المستخدم */
+.chat-input {
+  display: flex;
+  border-top: 1px solid #ddd;
+}
+
+/* حقل النص والقائمة المنسدلة */
+.chat-input input, .chat-input select {
+  flex: 1;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 25px;
+  margin: 8px;
+  background-color: rgba(255, 255, 255, 0.705);
+  color: rgba(0, 0, 0, 0.655);
+  text-align: right;
+  direction: rtl;
+}
+
+/* عند التركيز على الحقل */
+.chat-input input:focus, .chat-input select:focus {
+  outline: none;
+  border: 2px solid #9b6406;
+  box-shadow: 0 0 8px #000000;
+}
+
+/* زر الإرسال */
+.chat-input button {
+  background: #694520;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 20px;
+  margin: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* ------------------------------- */
+/* تنسيق زر خدمة العملاء (البسيط) */
+/* ------------------------------- */
+
+.support-button {
+  background-color: #694520;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 0 0 15px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  width: 100%;
+  transition: background-color 0.3s;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.support-button:hover {
+  background-color: #694520;
+}
+
+
+/*__________________________________ */
+/* جزء تنسيق الخريطة (تم التعديل لتكون بالأسفل) */
+/*__________________________________ */
+
+#map-container {
+    /* تغيير التموضع ليكون طبيعياً في الصفحة */
+    position: relative; 
+    top: auto;
+    left: auto;
+    
+    /* تنسيق الحجم والمحاذاة */
+    width: 90%;          /* عرض متجاوب */
+    max-width: 1000px;   /* حد أقصى للعرض */
+    height: auto;        /* الارتفاع حسب المحتوى */
+    margin: 20px auto;   /* توسيط الخريطة */
+    padding: 20px;
+    
+}
+
+/* وسم SVG الرئيسي */
+#ksa-map {
+    width: 100%;
+    height: auto;
+    max-height: 80vh; /* لضمان عدم تجاوز ارتفاع الشاشة */
+    display: block;
+    margin: 0 auto;
+}
+
+/* تنسيق مسارات المناطق */
+.region {
+    fill: transparent; 
+    stroke: #ffffff; 
+    stroke-width: 1; 
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.region:hover {
+    fill: rgba(233, 167, 88, 0.6); /* لون برتقالي ذهبي عند التمرير */
+    stroke-width: 2;
+}
+
+/* 🚀 تنسيق الفقاعة العائمة (Tooltip) */
+#region-tooltip {
+    /* تغيير إلى fixed لضمان تتبع الماوس بدقة عند التمرير */
+    position: fixed; 
+    background-color: rgba(255, 255, 255, 0.95); 
+    color: #694520;
+    border: 1px solid #694520;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 2000; /* أعلى من كل شيء */
+    pointer-events: none;
+    white-space: nowrap;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: none; /* مخفي افتراضياً */
+}
+
+
+/* __________________________________ */
+/* 💡 تنسيق قسم الاسئلة عن نبرة */
+/* __________________________________ */
+
+.faq-panel {
+    width: 700px;
+    max-width: 90%;
+    background: rgba(0, 0, 0, 0.486);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.faq-header {
+    text-align: center;
+    color: #f8c78a;
+    margin-bottom: 25px;
+    font-size: 27px;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+    padding-bottom: 15px;
+}
+
+.faq-question {
+    color: #e9a758;
+    font-size: 23px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.faq-answer {
+    color: #ffffff;
+    font-size: 20px;
+    margin-right: 15px;
+    text-align: right;
+    line-height: 1.6;
+}
+
+
+/* __________________________________ */
+/* 💡 تنسيق الفوتر (التعليق الثابت في الأسفل) [جديد] */
+/* __________________________________ */
+.app-footer {
+    width: 100%;
+    padding: 5px 25px;
+    background: #2e2213; /* لون داكن يتناسب مع الثيم */
+    color: #ffffff;
+    text-align: right;
+    font-size: 14px;
+    position: fixed; /* 💡 تثبيت في الأسفل */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.nabra-signature {
+    color: #c3c3c3; /* 💡 لون رصاصي خفيف لكلمة "نَبْرة" */
+    font-weight: bold;
+    font-style: italic;
+}
+
+
+
+/* ======================== أنماط الروبوت (تتبع الفأرة) ======================== */
+
+#robot-container {
+    position: fixed; 
+    bottom: 20px; /* تثبيت في الزاوية السفلية اليسرى */
+    left: 20px;
+    top: auto;
+    right: auto;
+    transform: none; /* إلغاء التوسيط القديم */
+    width: 300px; /* تصغير الحجم قليلاً */
+    height: 300px; 
+    opacity: 0.8;
+    z-index: 1; 
+    pointer-events: none; /* السماح بالنقر من خلاله */
+}
+
+/* الألوان الخاصة بالروبوت كما هي */
+.robot-body, .robot-arm, .robot-leg, .robot-foot {
+    fill: #694520;
+    stroke: #e9a758;
+    stroke-width: 2;
+}
+.robot-body-main { fill: #694520; stroke: #e9a758; stroke-width: 2; }
+.eye-background { fill: #000000; }
+.pupil { fill: #ffffff; transition: transform 0.1s ease-out; }
+.robot-accent { fill: #694520; stroke: #e9a758; stroke-width: 2; }
+.header-robot-icon { height: 30px; vertical-align: middle; margin: 0 5px; }
+
+
+
+
+
+/* الاستجابة للشاشات الصغيرة */
+@media (max-width: 860px) {
+    .chat-container {
+        width: 95%;
+        margin-top: 20px;
+    }
+    #map-container {
+        width: 100%;
+        border-radius: 0;
+    }
+    #robot-container {
+        width: 150px; /* تصغير الروبوت في الجوال */
+        height: 150px;
+    }
+}
+
+/* استجابة للجوال والشاشات الصغيرة */
+
+@media (max-width: 860px) {
+    .chat-container, .faq-panel {
+        width: 95%;
+    }
+    #map-container {
+        width: 100%;
+    }
+    #robot-container {
+        width: 120px;
+        height: 120px;
+        bottom: 80px; 
+        left: 10px;
+    }
+    .app-footer {
+        font-size: 12px;
+        padding: 8px 10px;
+    }
+}
